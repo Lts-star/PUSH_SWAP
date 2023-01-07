@@ -23,7 +23,7 @@ debug:
 	@cc -g $(SRC)
 
 $(NAME): $(SRC) $(HEADER)
-	$(CC) $(CFLAGS) $(SRC) -o push_swap
+	$(CC) $(SRC) -o push_swap
 
 
 clean:

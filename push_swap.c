@@ -100,12 +100,14 @@ int	main(int ac, char **av)
 		exit(1);
 	head_b = NULL;
 	head_a = NULL;
-	i = 0;
+	i = 1;
 	join = ft_strjoin(ac - 1, av + 1, " ");
-	str = ft_split(join, ' ');
+	printf("%s",join);
+	// printf("%s\n",join);
+	// str = ft_split(join, ' ');
 	// check_repeated(str, ac - 1);
-	while (str[i])
-		printf("%s\n",str[i]);
-		// head_a = push_back(head_a, check_int(str[i++]), 0);
+	// while (i < ac)
+	// 	head_a = push_back(head_a, ft_atoi(av[i++]), 0);
+		// printf("%s\n",str[i++]);
 	// doer(&head_a, &head_b, i);
 }

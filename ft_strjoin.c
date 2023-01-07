@@ -12,26 +12,6 @@
 
 #include "push_swap.h"
 
-static char	*ft_strcat(char *dest, char *src)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	if (!dest)
-		return (src);
-	while (dest[i])
-		i++;
-	while (src[j])
-	{
-		dest[i + j] = src[j];
-		j++;
-	}
-	dest[i + j] = '\0';
-	return (dest);
-}
-
 int	checkdb(int size, char **str)
 {
 	int	i;
@@ -60,40 +40,53 @@ void	error_print(void)
 	exit(1);
 }
 
-char	*join(char **strs, char *str, int size, char *sep)
+char	*ft_strcpy(char *dest, char *src)
 {
-	int	i;
+	int i;
 
-	i = 1;
-	str = ft_strdup(strs[0]);
-	ft_strcat(str, sep);
-	while (i < size)
+	i = 0;
+	while (src[i] != '\0')
 	{
-		ft_strcat(str, strs[i]);
-		if (i < size - 1)
-			ft_strcat(str, sep);
+		*dest = src[i];
 		i++;
+		dest++;
 	}
-	return (str);
+	return (dest);
+}
+
+int		return_lenght(int size, char **strs, int size_sep)
+{
+	int i;
+	int len;
+
+	i = -1;
+	len = size_sep * -1;
+	while (++i < size)
+		len += size_sep + ft_strlen(strs[i]);
+	return (len);
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
 	int		i;
-	char	*str;
-	int		l;
+	char	*res;
+	int		len;
 
-	i = 0;
-	l = 0;
-	if (!checkdb(size, strs))
-		error_print();
-	while (i < size)
+	if (size == 0)
 	{
-		l += ft_strlen(strs[i]) + 1;
-		i++;
+		res = (char*)malloc(1);
+		return (res);
 	}
-	str = malloc(sizeof(char) * l);
-	if (!str)
-		error_print();
-	return (join(strs, str, size, sep));
+	len = return_lenght(size, strs, ft_strlen(sep));
+	i = -1;
+	if ((res = malloc(sizeof(char) * (len + 1))) == NULL)
+		return (0);
+	while (++i < size)
+	{
+		res = ft_strcpy(res, strs[i]);
+		if (i + 1 < size)
+			res = ft_strcpy(res, sep);
+	}
+	*res = '\0';
+	return (res - len);
 }
